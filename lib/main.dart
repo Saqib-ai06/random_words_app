@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Catalog App',
+        title: 'Random Words',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
@@ -69,21 +68,44 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget for $selectedIndex');
     }
     return LayoutBuilder(builder: (context, constraints) {
+      final theme = Theme.of(context);
+      final style = theme.textTheme.displaySmall!.copyWith(
+        color: theme.colorScheme.onPrimary,
+      );
+
       return Scaffold(
+        appBar: AppBar(
+          backgroundColor: theme.colorScheme.primary,
+          title: Row(
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: Icon(Icons.menu),
+                label: Text(""),
+              ),
+              Text(
+                style: style,
+                'Random Words',
+              ),
+            ],
+          ),
+        ),
         body: Row(
           children: [
             SafeArea(
               child: NavigationRail(
                 // minWidth: 40,
-                // minExtendedWidth: 120,
-                extended: constraints.maxWidth >= 600,
+                minExtendedWidth: 180,
+                extended: true, // constraints.maxWidth >= 600,
                 destinations: [
                   NavigationRailDestination(
-                    icon: Icon(Icons.home),
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home),
                     label: Text('Home'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
+                    icon: Icon(Icons.favorite_border),
+                    selectedIcon: Icon(Icons.favorite),
                     label: Text('Favorites'),
                   ),
                 ],
