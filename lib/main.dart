@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: NavigationRail(
                 // minWidth: 40,
                 minExtendedWidth: 180,
-                extended: true, // constraints.maxWidth >= 600,
+                extended: constraints.maxWidth >= 600,
                 destinations: [
                   NavigationRailDestination(
                     icon: Icon(Icons.home_outlined),
